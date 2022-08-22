@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as chrome_options
+from selenium.webdriver.chrome.service import Service
 
 
 @pytest.fixture
@@ -16,10 +17,13 @@ def get_chrome_options():
 def get_webdriver(get_chrome_options):
     # path ""C:\Users\stepa\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Python 3.9\Scripts\chromedriver.exe""
     options = get_chrome_options
-    driver = webdriver.Chrome(
-        executable_path='C:/Users/stepa/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.9/Scripts/chromedriver.exe',
-        options=options)
-    return driver
+    ser = Service(
+        'C:/Users/stepa/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.9/Scripts/chromedriver.exe')
+    s = webdriver.Chrome(service=ser, options=options)
+    return s
+
+
+
 
 
 @pytest.fixture(scope='function')
