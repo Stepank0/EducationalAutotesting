@@ -10,7 +10,7 @@ class SeleniumBase:
 
     def __init__(self, driver):
         self.driver = driver
-        self.__wait = WebDriverWait(driver, 15, 0.3, ignored_exceptions=StaleElementReferenceException)
+        self.__wait = WebDriverWait(driver, 15, 0.5, ignored_exceptions=StaleElementReferenceException)
 
     def __get_selenium_by(self, find_by: str) -> dict:
         find_by = find_by.lower()
@@ -51,4 +51,7 @@ class SeleniumBase:
     def get_element_by_text(self, element: List[WebElement], name: str) -> WebElement:
         name = name.lower()
         return [element for element in element if element.text.lower() == name][0]
+
+    def delete_cookie(self, cookie_name: str) -> None:
+        self.driver.delete_cookie('cookie_name')
 

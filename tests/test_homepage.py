@@ -15,9 +15,13 @@ class TestHomepage:
 
         assert expected_links == actual_links, 'Validating Nav Links text'
         # homepage_nav.get_nav_link_by_name('Beauty').click()
-        elements = homepage_nav.get_nav_links()
 
+
+    def test_nav(self):
+        homepage_nav = HomepageNav(self.driver)
+        homepage_nav.driver.delete_cookie('ak_bmsc')
         for index in range(13):
             homepage_nav.get_nav_links()[index].click()
-            homepage_nav.driver.delete_all_cookies()
-            time.sleep(3)
+            homepage_nav.driver.delete_cookie('ak_bmsc')
+
+
